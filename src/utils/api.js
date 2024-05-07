@@ -7,3 +7,7 @@ const ncNewsApi = axios.create({
 export const fetchArticles = () => {
     return ncNewsApi.get(`/articles`)
 }
+
+export const fetchArticlesById = (id) => {
+    return ncNewsApi.get(`/articles/${id}`)
+}
