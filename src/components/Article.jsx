@@ -18,7 +18,6 @@ function Article(){
         })
     },[article_id])
 
-    console.log(article)
     if(loading){
         return <h2>Loading...</h2>
     }
