@@ -1,41 +1,62 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { fetchArticlesById } from "../utils/api";
+import { Link, useParams } from "react-router-dom";
+import { fetchArticlesById, fetchCommentsById } from "../utils/api";
 import { useState } from "react";
+import CommentCard from "./CommentCard";
 
 function Article(){
     const {article_id} = useParams();
-    const [loading ,setLoading] = useState(true)
+    const [loadingArticle ,setLoadingArticle] = useState(true)
+    const [loadingComments, setLoadingComments] = useState(true)
     const [article, setArticle] = useState({})
-    const [error, setError] = useState(null)
+    const [comments, setComments] = useState([])
+    const [errorArticle, setErrorArticle] = useState(null)
+    const [errorComments, setErrorComments] = useState(null)
+    const commentLink = `/articles/${article_id}/comments`
     useEffect(() => {
         fetchArticlesById(article_id).then((data) => {
             setArticle(data.data)
-            setLoading(false)
+            setLoadingArticle(false)
         }).catch((err) => {
-            setError(err)
-            setLoading(false)
+            setErrorArticle(err)
+            setLoadingArticle(false)
+        })
+    },[article_id])
+    useEffect(() => {
+        fetchCommentsById(article_id).then((data) => {
+            setComments(data.data)
+            setLoadingComments(false)
+        }).catch((err) => {
+            setErrorComments(err)
+            setLoadingComments(false)
         })
     },[article_id])
 
-    if(loading){
+
+    if(loadingArticle || loadingComments){
         return <h2>Loading...</h2>
     }
 
-    if(error){
+    if(errorArticle || errorComments){
         return <h2>Error: {error.message}</h2>
     }
 
     return(
-        <div>
+        <>
+        <div className="article">
             <h3>{article.article.title}</h3>
+            <h4>{article.article.author}</h4>
             <img src={article.article.article_img_url}/>
             <p>{article.article.body}</p>
             <p>Total votes: {article.article.votes}</p>
             <button>👍 vote</button>
-            <button>💬 comment</button>
-
+            <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
+            {comments.map((comment) => {
+                return <CommentCard comment={comment}/>
+            })}
+        </>
+
     )
 }
 

@@ -11,3 +11,7 @@ export const fetchArticles = () => {
 export const fetchArticlesById = (id) => {
     return ncNewsApi.get(`/articles/${id}`)
 }
+
+export const fetchCommentsById = (id) => {
+    return ncNewsApi.get(`/articles/${id}/comments`)
+}
