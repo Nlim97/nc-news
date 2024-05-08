@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchArticlesById, fetchCommentsById } from "../utils/api";
+import { fetchArticlesById, fetchCommentsById, patchVotes } from "../utils/api";
 import { useState } from "react";
 import CommentCard from "./CommentCard";
 
@@ -12,10 +12,13 @@ function Article(){
     const [comments, setComments] = useState([])
     const [errorArticle, setErrorArticle] = useState(null)
     const [errorComments, setErrorComments] = useState(null)
+    const [votes, setVotes] = useState(0)
     const commentLink = `/articles/${article_id}/comments`
+
     useEffect(() => {
         fetchArticlesById(article_id).then((data) => {
             setArticle(data.data)
+            setVotes(data.data.article.votes)
             setLoadingArticle(false)
         }).catch((err) => {
             setErrorArticle(err)
@@ -31,6 +34,11 @@ function Article(){
             setLoadingComments(false)
         })
     },[article_id])
+
+    function handleVote(){
+        setVotes((currVotes) =>  currVotes + 1)
+        patchVotes(article_id, {inc_votes: 1})
+    }
 
 
     if(loadingArticle || loadingComments){
@@ -48,8 +56,10 @@ function Article(){
             <h4>{article.article.author}</h4>
             <img src={article.article.article_img_url}/>
             <p>{article.article.body}</p>
-            <p>Total votes: {article.article.votes}</p>
-            <button>👍 vote</button>
+            <p>Total votes: {votes}</p>
+            <button onClick={() => {
+                handleVote()
+            }}>👍 vote</button>
             <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
             {comments.map((comment) => {
