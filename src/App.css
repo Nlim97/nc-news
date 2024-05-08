@@ -5,11 +5,13 @@
   text-align: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
+h1{
+  color: red;
+}
 .articles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .article_card{
   width: 300px;
@@ -25,4 +27,19 @@
 .article_img{
   margin: 0;
   width: 200px;
+}
+.article{
+  border: 2px black solid;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 15px;
+}
+.article button {
+  margin:5px;
+}
+.commentCard{
+  border: 2px black solid;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 15px;
 }
