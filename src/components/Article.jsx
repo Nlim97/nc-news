@@ -14,8 +14,10 @@ function Article(){
     const [errorComments, setErrorComments] = useState(null)
     const [votes, setVotes] = useState(0)
     const [voted, setVoted] = useState(false)
+    const [user, setUser] = useState('tickle122')
     const [voteError, setVoteError] = useState(false)
     const commentLink = `/articles/${article_id}/comments`
+
 
     useEffect(() => {
         fetchArticlesById(article_id).then((data) => {
@@ -71,7 +73,7 @@ function Article(){
         </div>
             <CommentForm article_id={article_id} setComments={setComments}/>
             {comments.map((comment, index) => {
-                return <CommentCard comment={comment} setComments={setComments} index={index} />
+                return <CommentCard comment={comment} setComments={setComments} index={index} user={user}/>
             })}
         </>
 

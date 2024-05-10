@@ -34,4 +34,5 @@ export const getTopics = () => {
 
 export const topicQuery = (topic) => {
     return ncNewsApi.get(`/articles?topic=${topic}`)
+
 }

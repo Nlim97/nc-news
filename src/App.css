@@ -55,6 +55,7 @@ h1{
 }
 .topics{
   display: flex;
+
 }
 .topicCard{
   border: 2px black solid;

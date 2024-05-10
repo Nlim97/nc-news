@@ -31,6 +31,9 @@ function App() {
       <Route
       path='/topics/:topic'
       element={<Articles/>}></Route>
+      <Route>
+        
+      </Route>
     </Routes>
     </>
   )
