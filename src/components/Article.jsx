@@ -13,6 +13,8 @@ function Article(){
     const [errorArticle, setErrorArticle] = useState(null)
     const [errorComments, setErrorComments] = useState(null)
     const [votes, setVotes] = useState(0)
+    const [voted, setVoted] = useState(false)
+    const [voteError, setVoteError] = useState(false)
     const commentLink = `/articles/${article_id}/comments`
 
     useEffect(() => {
@@ -37,7 +39,12 @@ function Article(){
 
     function handleVote(){
         setVotes((currVotes) =>  currVotes + 1)
-        patchVotes(article_id, {inc_votes: 1})
+        setVoted(true)
+        setVoteError(false)
+        patchVotes(article_id, {inc_votes: 1}).catch((err) => {
+            console.error(err)
+            setVoteError(true)
+        })
     }
 
 
@@ -46,7 +53,7 @@ function Article(){
     }
 
     if(errorArticle || errorComments){
-        return <h2>Error: {error.message}</h2>
+        return <h2>Error: {errorArticle ? errorArticle.message : errorComments.message}</h2>
     }
 
     return(
@@ -59,7 +66,7 @@ function Article(){
             <p>Total votes: {votes}</p>
             <button onClick={() => {
                 handleVote()
-            }}>👍 vote</button>
+            }} disabled={voted}>👍 vote</button>
             <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
             {comments.map((comment) => {

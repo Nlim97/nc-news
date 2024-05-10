@@ -19,3 +19,7 @@ export const fetchCommentsById = (id) => {
 export const patchVotes = (id, obj) => {
     return ncNewsApi.patch(`/articles/${id}`, obj)
 }
+
+export const postComment = (id, obj) => {
+    return ncNewsApi.post(`/articles/${id}/comments`, obj)
+}
