@@ -55,14 +55,12 @@ h1{
 }
 .topics{
   display: flex;
-  justify-content: center;
+
 }
 .topicCard{
-  display: flex;
-  flex-direction: column;
-  border: 2px solid black;
-  margin: 10px;
-  width: 33%;
-  padding: 10px;
+  border: 2px black solid;
   border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: 33%;
 }

@@ -28,6 +28,9 @@ function App() {
       <Route
       path='/topics'
       element={<Topics/>}></Route>
+      <Route
+      path='/topics/:topic'
+      element={<Articles/>}></Route>
       <Route>
         
       </Route>
