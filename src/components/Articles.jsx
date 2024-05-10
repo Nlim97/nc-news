@@ -1,21 +1,35 @@
 import { useEffect, useState } from "react";
-import { fetchArticles } from "../utils/api";
+import { fetchArticles, topicQuery } from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import { useParams } from "react-router-dom";
 
 function Articles(){
+    const { topic } = useParams()
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        fetchArticles().then((data) => {
-            setArticles(data.data)
-            setLoading(false)
-        }).catch((error) => {
-            setError(error)
-            setLoading(false)
-        })
-    },[])
+        if(topic){
+            topicQuery(topic).then((data) => {
+                setArticles(data.data)
+                setLoading(false)
+            }).catch((error) => {
+                setError(error)
+                setLoading(false)
+            })
+        }else {
+            fetchArticles().then((data) => {
+                setArticles(data.data)
+                setLoading(false)
+            }).catch((error) => {
+                setError(error)
+                setLoading(false)
+            })
+        }
+        
+    },[topic])
+
 
     if(loading){
         return <h2>Loading...</h2>
