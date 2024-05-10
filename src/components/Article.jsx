@@ -69,7 +69,7 @@ function Article(){
             }} disabled={voted}>👍 vote</button>
             <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
-            <CommentForm article_id={article_id}/>
+            <CommentForm article_id={article_id} setComments={setComments}/>
             {comments.map((comment, index) => {
                 return <CommentCard comment={comment} setComments={setComments} index={index} />
             })}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postComment } from "../utils/api";
 
-function CommentForm({article_id}){
+function CommentForm({article_id, setComments}){
     const [username, setUsername] = useState("")
     const [body, setBody] = useState("")
     const [postErr, setPostErr] = useState(null)
@@ -9,6 +9,14 @@ function CommentForm({article_id}){
 
     function handleSubmit(event){
         event.preventDefault()
+        const newComment = {
+            comment_id: Date.now(),
+            author: username,
+            body: body,
+            created_at: new Date().toISOString(),
+            votes: 0,
+        };
+        setComments((currComments) => [newComment,...currComments])
         postComment(article_id,{username: username, body: body}).then((res) => {
             setBody("")
             setUsername("")
