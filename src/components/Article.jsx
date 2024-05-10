@@ -70,8 +70,8 @@ function Article(){
             <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
             <CommentForm article_id={article_id}/>
-            {comments.map((comment) => {
-                return <CommentCard comment={comment}/>
+            {comments.map((comment, index) => {
+                return <CommentCard comment={comment} setComments={setComments} index={index} />
             })}
         </>
 
