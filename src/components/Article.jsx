@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Form, Link, useParams } from "react-router-dom";
 import { fetchArticlesById, fetchCommentsById, patchVotes } from "../utils/api";
 import { useState } from "react";
 import CommentCard from "./CommentCard";
-
+import CommentForm from "./Form";
 function Article(){
     const {article_id} = useParams();
     const [loadingArticle ,setLoadingArticle] = useState(true)
@@ -69,6 +69,7 @@ function Article(){
             }} disabled={voted}>👍 vote</button>
             <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
+            <CommentForm article_id={article_id}/>
             {comments.map((comment) => {
                 return <CommentCard comment={comment}/>
             })}
