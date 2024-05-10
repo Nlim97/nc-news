@@ -53,3 +53,16 @@ h1{
   width: 70px;
 
 }
+.topics{
+  display: flex;
+  justify-content: center;
+}
+.topicCard{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  margin: 10px;
+  width: 33%;
+  padding: 10px;
+  border-radius: 5px;
+}
