@@ -11,7 +11,6 @@ function Article(){
     const [article, setArticle] = useState({})
     const [comments, setComments] = useState([])
     const [errorArticle, setErrorArticle] = useState(null)
-    const [errorComments, setErrorComments] = useState(null)
     const [votes, setVotes] = useState(0)
     const [voted, setVoted] = useState(false)
     const [user, setUser] = useState('tickle122')
@@ -19,10 +18,11 @@ function Article(){
     const commentLink = `/articles/${article_id}/comments`
 
 
+
     useEffect(() => {
-        fetchArticlesById(article_id).then((data) => {
-            setArticle(data.data)
-            setVotes(data.data.article.votes)
+        fetchArticlesById(article_id).then(({data}) => {
+            setArticle(data)
+            setVotes(data.article.votes)
             setLoadingArticle(false)
         }).catch((err) => {
             setErrorArticle(err)
@@ -34,8 +34,10 @@ function Article(){
             setComments(data.data)
             setLoadingComments(false)
         }).catch((err) => {
-            setErrorComments(err)
-            setLoadingComments(false)
+            if(err.response.status === 404){
+                setComments([])
+                setLoadingComments(false)
+            }
         })
     },[article_id])
 
@@ -44,7 +46,6 @@ function Article(){
         setVoted(true)
         setVoteError(false)
         patchVotes(article_id, {inc_votes: 1}).catch((err) => {
-            console.error(err)
             setVoteError(true)
         })
     }
@@ -54,8 +55,8 @@ function Article(){
         return <h2>Loading...</h2>
     }
 
-    if(errorArticle || errorComments){
-        return <h2>Error: {errorArticle ? errorArticle.message : errorComments.message}</h2>
+    if(errorArticle ){
+        return <h2>Error: {errorArticle}</h2>
     }
 
     return(
@@ -72,9 +73,9 @@ function Article(){
             <Link to={commentLink}><button>💬Read comment</button></Link>
         </div>
             <CommentForm article_id={article_id} setComments={setComments}/>
-            {comments.map((comment, index) => {
-                return <CommentCard comment={comment} setComments={setComments} index={index} user={user}/>
-            })}
+            {comments.length > 0 ? comments.map((comment, index) => {
+                return<CommentCard comment={comment} setComments={setComments} index={index} user={user} key={index}/> 
+            }): <h3>no comments yet</h3>}
         </>
 
     )

@@ -8,6 +8,19 @@
 h1{
   color: red;
 }
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar p {
+  margin:15px;
+  font-size: 2rem;
+  color: red;
+}
+.sort{
+  margin:10px;
+}
 .articles {
   display: flex;
   flex-wrap: wrap;

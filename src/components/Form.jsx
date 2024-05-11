@@ -16,15 +16,14 @@ function CommentForm({article_id, setComments}){
             created_at: new Date().toISOString(),
             votes: 0,
         };
-        setComments((currComments) => [newComment,...currComments])
         postComment(article_id,{username: username, body: body}).then((res) => {
             setBody("")
+            setComments((currComments) => [...currComments, newComment])
             setUsername("")
             setSubmitted(true) 
-        }).catch((err) => {
+        }).catch((err) => { 
             setPostErr(err)
         })
-        
     }
     if(postErr){
         return <h3>Error: {postErr.message}</h3>
