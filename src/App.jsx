@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Article from './components/Article'
 import Comments from './components/Comments'
 import Topics from './components/Topics'
+import Error from './components/ErrorPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,9 @@ function App() {
     <>
     <Header/>
     <Routes>
+      <Route
+      path='/'
+      ></Route>
       <Route 
       path='/articles'
       element={<Articles/>}
@@ -31,9 +35,10 @@ function App() {
       <Route
       path='/topics/:topic'
       element={<Articles/>}></Route>
-      <Route>
-        
-      </Route>
+      <Route
+      path='*'
+      element={<Error/>}
+      ></Route>
     </Routes>
     </>
   )

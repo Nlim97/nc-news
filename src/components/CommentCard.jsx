@@ -1,16 +1,15 @@
 import { deleteComment } from "../utils/api";
 import { useState } from "react";
 function CommentCard({comment, setComments, index, user}){
-    const [deleted, setDeleted] = useState(false)
     const [error, setError] = useState(null)
 
     function handleDeleteComment(){
         if(user === comment.author){
-            deleteComment(comment.comment_id).then((res) => {
-                setDeleted(true)
+            deleteComment(comment.comment_id).then(() => {
                 setComments((currComments) => {
-                    currComments.splice(index,1)
-                    return[...currComments]
+                    const updatedComments = [...currComments]
+                    updatedComments.splice(index,1)
+                    return updatedComments
                 })
             }).catch((err) => {
                 setError(err)
@@ -30,7 +29,7 @@ function CommentCard({comment, setComments, index, user}){
                 <p>👍{comment.votes}</p>
                 <button onClick={() => {
                     handleDeleteComment()
-                }} disabled={deleted}>Delete Comment 🗑️</button>
+                }}>Delete Comment 🗑️</button>
     </section>)
 }
 
