@@ -5,13 +5,12 @@ function CommentCard({comment, setComments, index, user}){
 
     function handleDeleteComment(){
         if(user === comment.author){
-            deleteComment(comment.comment_id).then(() => {
-                setComments((currComments) => {
-                    const updatedComments = [...currComments]
-                    updatedComments.splice(index,1)
-                    return updatedComments
-                })
-            }).catch((err) => {
+            setComments((currComments) => {
+                const updatedComments = [...currComments]
+                updatedComments.splice(index,1)
+                return updatedComments
+            })
+            deleteComment(comment.comment_id).catch((err) => {
                 setError(err)
             })
         }else{

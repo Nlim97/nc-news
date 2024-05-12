@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Form, Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchArticlesById, fetchCommentsById, patchVotes } from "../utils/api";
 import { useState } from "react";
 import CommentCard from "./CommentCard";
