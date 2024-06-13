@@ -7,6 +7,7 @@ import Article from './components/Article'
 import Comments from './components/Comments'
 import Topics from './components/Topics'
 import Error from './components/ErrorPage'
+import Home from './components/Home'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route
       path='/'
+      element={<Home />}
       ></Route>
       <Route 
       path='/articles'

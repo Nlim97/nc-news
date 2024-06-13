@@ -1,5 +1,6 @@
 #root {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -37,6 +38,10 @@ h1{
   margin-bottom: 10px;
   border-radius: 5px;
 }
+.home{
+  display: flex;
+  justify-content: space-evenly;
+}
 .article_img{
   margin: 0;
   width: 200px;
@@ -68,6 +73,7 @@ h1{
 }
 .topics{
   display: flex;
+  justify-content: center;
 
 }
 .topicCard{
@@ -75,5 +81,5 @@ h1{
   border-radius: 5px;
   margin: 10px;
   padding: 10px;
-  width: 33%;
+  width: 20%;
 }
