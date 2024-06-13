@@ -6,7 +6,7 @@ import sortArticles from "../utils/sortArticles";
 
 function Articles(){
     const { topic } = useParams()
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const [sortBy, setSortBy] = useState("Date")

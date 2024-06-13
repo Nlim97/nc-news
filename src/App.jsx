@@ -9,8 +9,6 @@ import Topics from './components/Topics'
 import Error from './components/ErrorPage'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     <Header/>

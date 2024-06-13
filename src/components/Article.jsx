@@ -56,7 +56,7 @@ function Article(){
     }
 
     if(errorArticle ){
-        return <h2>Error: {errorArticle}</h2>
+        return <h2>Error: {errorArticle.message}</h2>
     }
 
     return(
